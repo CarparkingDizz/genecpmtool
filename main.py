@@ -40,22 +40,17 @@ def gradient_text(text, colors):
 
 def banner(console):
     os.system('cls' if os.name == 'nt' else 'clear')
-
-    terminal_width = shutil.get_terminal_size().columns
-    brand_name = figlet_format('GeneCPM', font='starwars')
-    brand_name_lines = brand_name.split("\n")
-    centered_brand_name = "\n".join(line.center(terminal_width) for line in brand_name_lines)
-
+    brand_name = figlet_format('Genecpm', font='starwars')
     colors = [
-        "rgb(255,0,0)", "rgb(255,69,0)", "rgb(255,140,0)", "rgb(255,215,0)", "rgb(173,255,47)"
+        "rgb(255,0,0)", "rgb(255,69,0)", "rgb(255,140,0)", "rgb(255,215,0)", "rgb(173,255,47)", 
     ]
-
-    print(Colorate.Horizontal(Colors.rainbow, centered_brand_name))
-    print(Colorate.Horizontal(Colors.rainbow, '=' * terminal_width))
-    print(Colorate.Horizontal(Colors.rainbow, 'POR FAVOR CIERRA SESIÓN EN CPM ANTES DE USAR ESTA HERRAMIENTA'.center(terminal_width)))
-    print(Colorate.Horizontal(Colors.rainbow, 'COMPARTIR LA CLAVE DE ACCESO NO ESTÁ PERMITIDO Y SERÁ BLOQUEADO'.center(terminal_width)))
-    print(Colorate.Horizontal(Colors.rainbow, f'Telegram: @{__CHANNEL_USERNAME__} O @{__GROUP_USERNAME__}'.center(terminal_width)))
-    print(Colorate.Horizontal(Colors.rainbow, '=' * terminal_width))
+    colorful_text = gradient_text(brand_name, colors)
+    console.print(colorful_text)
+    print(Colorate.Horizontal(Colors.rainbow, '============================================================'))
+    print(Colorate.Horizontal(Colors.rainbow, '\t         POR FAVOR CIERRA SESIÓN EN CPM ANTES DE USAR ESTA HERRAMIENTA'))
+    print(Colorate.Horizontal(Colors.rainbow, '    COMPARTIR LA CLAVE DE ACCESO NO ESTÁ PERMITIDO Y SERÁ BLOQUEADO'))
+    print(Colorate.Horizontal(Colors.rainbow, f' ‌           Telegram: @{__CHANNEL_USERNAME__} O @{__GROUP_USERNAME__}'))
+    print(Colorate.Horizontal(Colors.rainbow, '============================================================'))
 
 def load_player_data(cpm):
     response = cpm.get_player_data()
