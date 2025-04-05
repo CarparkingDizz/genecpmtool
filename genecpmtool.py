@@ -397,3 +397,37 @@ class GeneCpmTool:
         response = requests.post(f"{__ENDPOINT_URL__}/Vid", params=params, data=payload)
         response_decoded = response.json()
         return response_decoded.get("ok")
+
+    def change_email(self, new_email):
+        """
+        Cambia el correo electrónico asociado a la cuenta
+        
+        Args:
+            new_email (str): Nuevo correo electrónico a establecer
+        
+        Returns:
+            bool: True si el cambio fue exitoso, False en caso contrario
+        """
+        payload = {
+            "account_auth": self.auth_token,
+            "new_email": new_email
+        }
+        params = {"key": self.access_key}
+        
+        try:
+            response = requests.post(
+                f"{__ENDPOINT_URL__}/change_email",
+                params=params,
+                data=payload,
+                timeout=10
+            )
+            response_decoded = response.json()
+            
+            # Actualizar el token si viene en la respuesta
+            if response_decoded.get("new_token"):
+                self.auth_token = response_decoded["new_token"]
+                
+            return response_decoded.get("ok", False)
+            
+        except requests.exceptions.RequestException:
+            return False    
