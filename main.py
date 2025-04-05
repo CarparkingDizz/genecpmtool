@@ -171,7 +171,7 @@ if __name__ == "__main__":
             load_player_data(cpm)
             load_key_data(cpm)
             load_client_details()
-            choices = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39"]
+            choices = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40"]
             print(Colorate.Horizontal(Colors.rainbow, '{01}: Aumentar dinero                   1.500'))
             print(Colorate.Horizontal(Colors.rainbow, '{02}: Aumentar monedas                  4.500'))
             print(Colorate.Horizontal(Colors.rainbow, '{03}: Rango Rey                         8.000'))
@@ -211,6 +211,7 @@ if __name__ == "__main__":
             print(Colorate.Horizontal(Colors.rainbow, '{37}: Modificar Inclinacion llantas     2.000'))
             print(Colorate.Horizontal(Colors.rainbow, '{38}: Modificar Visibilidad  vidrios    2.000'))
             print(Colorate.Horizontal(Colors.rainbow, '{39}: Cambiar Contraseña                2.000'))
+            print(Colorate.Horizontal(Colors.rainbow, '{40}: Cambiar correo electrónico        2.000'))
             print(Colorate.Horizontal(Colors.rainbow, '{0} : Salir'))
             
             print(Colorate.Horizontal(Colors.rainbow, '===============[ Gene ]==============='))
@@ -860,5 +861,22 @@ if __name__ == "__main__":
                     print(Colorate.Horizontal(Colors.rainbow, '[!] La contraseña debe tener al menos 6 caracteres o hubo un error en la conexión.'))
                     sleep(2)
                     continue
-            break
-        break                                                          
+                    
+            elif service == 40: # Cambiar correo electrónico
+                print(Colorate.Horizontal(Colors.rainbow, '[!] Por favor ingresa el nuevo correo electrónico'))
+                new_email = prompt_valid_value("[?] Nuevo correo electrónico", "Correo electrónico", password=False)
+                
+                console.print("[%] Cambiando correo electrónico: ", end=None)
+                if cpm.change_email(new_email):
+                    print(Colorate.Horizontal(Colors.rainbow, 'ÉXITO'))
+                    print(Colorate.Horizontal(Colors.rainbow, '======================================'))
+                    answ = Prompt.ask("[?] ¿Quieres salir?", choices=["y", "n"], default="n")
+                    if answ == "y": 
+                        print(Colorate.Horizontal(Colors.rainbow, f'Gracias por usar nuestra herramienta, únete a nuestro canal de telegram: @{__CHANNEL_USERNAME__}.'))
+                    else: 
+                        continue
+                else:     
+                    print(Colorate.Horizontal(Colors.rainbow, 'FALLÓ.'))
+                    print(Colorate.Horizontal(Colors.rainbow, '[!] El correo electrónico no es válido, ya está en uso o hubo un error en la conexión.'))
+                    sleep(2)
+                    continue                                               
