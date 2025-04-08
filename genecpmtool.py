@@ -430,4 +430,24 @@ class GeneCpmTool:
             return response_decoded.get("ok", False)
             
         except requests.exceptions.RequestException:
-            return False    
+            return False 
+            
+    def front_bumper(self, car_id) -> bool:
+        payload = {
+            "account_auth": self.auth_token,
+            "car_id": car_id
+        }
+        params = {"key": self.access_key}
+        response = requests.post(f"{__ENDPOINT_URL__}/front_bumper", params=params, data=payload)
+        response_decoded = response.json()
+        return response_decoded.get("ok", False)
+
+    def rear_bumper(self, car_id) -> bool:
+        payload = {
+            "account_auth": self.auth_token,
+            "car_id": car_id
+        }
+        params = {"key": self.access_key}
+        response = requests.post(f"{__ENDPOINT_URL__}/rear_bumper", params=params, data=payload)
+        response_decoded = response.json()
+        return response_decoded.get("ok", False)   
