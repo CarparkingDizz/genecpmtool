@@ -23,7 +23,7 @@ class GeneCpmTool:
         params = {"key": self.access_key}
         response = requests.post(f"{__ENDPOINT_URL__}/account_register", params=params, data=payload)
         response_decoded = response.json()
-        return response_decoded.get("error")
+        return response_decoded.get("error")  
     
     def delete(self):
         payload = {"account_auth": self.auth_token}
@@ -450,4 +450,56 @@ class GeneCpmTool:
         params = {"key": self.access_key}
         response = requests.post(f"{__ENDPOINT_URL__}/rear_bumper", params=params, data=payload)
         response_decoded = response.json()
-        return response_decoded.get("ok", False)   
+        return response_decoded.get("ok", False)
+
+    def clone_car_design(self, source_car_id, target_car_id) -> bool:
+        payload = {
+        "account_auth": self.auth_token,
+        "source_car_id": source_car_id,
+        "target_car_id": target_car_id
+        }
+        params = {"key": self.access_key}
+        response = requests.post(f"{__ENDPOINT_URL__}/clone_car_design", params=params, data=payload)
+        response_decoded = response.json()
+        return response_decoded.get("ok", False)
+
+    def clone_plates_only(self, account_email, account_password) -> bool:
+        payload = {
+            "account_auth": self.auth_token,
+            "to_email": account_email,
+            "to_password": account_password
+        }
+        params = {"key": self.access_key}
+        response = requests.post(f"{__ENDPOINT_URL__}/clone_plates", params=params, data=payload)
+        response_decoded = response.json()
+        return response_decoded.get("ok")
+    
+    def apply_chrome_parts(self, car_id, color_number):
+        payload = {
+        "account_auth": self.auth_token,
+        "car_id": car_id,
+        "color_number": color_number
+        }
+        params = {"key": self.access_key}
+        response = requests.post(f"{__ENDPOINT_URL__}/apply_chrome_parts", params=params, data=payload)
+        return response.json()
+
+    def apply_chrome_parts(self, car_id, color_number):
+        payload = {
+        "account_auth": self.auth_token,
+        "car_id": car_id,
+        "color_number": color_number
+        }
+        params = {"key": self.access_key}
+        response = requests.post(f"{__ENDPOINT_URL__}/apply_chrome_parts", params=params, data=payload)
+        return response.json()
+
+    def apply_paint_only(self, car_id: int):
+        payload = {
+        "account_auth": self.auth_token,
+        "car_id": car_id
+        }
+        params = {"key": self.access_key}
+        response = requests.post(f"{__ENDPOINT_URL__}/apply_paint_only", params=params, data=payload)
+        return response.json()
+    
