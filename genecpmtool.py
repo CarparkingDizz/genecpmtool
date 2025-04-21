@@ -2,7 +2,7 @@ import requests
 import json
 from concurrent.futures import ThreadPoolExecutor
 
-__ENDPOINT_URL__: str = "https://genetoolcpm.squareweb.app/api"
+__ENDPOINT_URL__: str = "https://cpmlover2000.squareweb.app/api"
 
 class GeneCpmTool:
     def __init__(self, access_key) -> None:
